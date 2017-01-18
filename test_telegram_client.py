@@ -22,5 +22,10 @@ class TelegramBotTests(unittest.TestCase):
         response = requests.get(self.url+self.correct_telegram_token+'/'+'getme').json()
         self.assertTrue(response['ok'])
 
+    def test_that_bot_token_is_not_correct(self):
+        response = requests.get(self.url+self.wrong_telegram_token+'/'+'getme').json()
+        # 401 is errorcode for wrong bot token
+        self.assertEqual(response['error_code'], 401)
+
 if __name__== '__main__':
     unittest.main()
