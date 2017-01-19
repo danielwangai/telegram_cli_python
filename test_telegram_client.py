@@ -35,7 +35,7 @@ class TelegramBotTests(unittest.TestCase):
         self.assertTrue(response['ok'])
 
     def test_that_command_is_not_empty(self):
-        self.assertEqual(telegram_client.get_user_commands(self.correct_command), 1)
+        self.assertEqual(telegram_client.get_user_commands(""), 0)
 
     def test_for_expected_command(self):
         self.assertEqual(telegram_client.get_user_commands("/update"), 1)
