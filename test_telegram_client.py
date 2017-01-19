@@ -9,14 +9,15 @@ class TelegramBotTests(unittest.TestCase):
         self.correct_telegram_token = "295227945:AAH8aElKnUzIitrlvuvD-RzkRz31U1-0HXw"
         self.wrong_telegram_token = "123446789:ANT8aElKnUzIitrlvuvD-RzkRz31U1-0HXw"
         self.url = "https://api.telegram.org/bot"
+        self.message = "text"
 
     def test_sends_message_successfully(self):
         # response after posting to telegram API
-        response = telegram_client.send_message(self.correct_chat_id)
+        response = telegram_client.send_message(self.correct_chat_id, self.message)
         # get a list of values(from dictionary) and gets the first - check of ok is true
         self.assertTrue(list(response.values())[0])
     def test_wrong_chat_id(self):
-        self.assertEqual(telegram_client.send_message(self.incorrect_correct_chat_id)['error_code'], 400)
+        self.assertEqual(telegram_client.send_message(self.incorrect_correct_chat_id, self.message)['error_code'], 400)
 
     def test_that_bot_token_is_correct(self):
         response = requests.get(self.url+self.correct_telegram_token+'/'+'getme').json()
@@ -30,5 +31,8 @@ class TelegramBotTests(unittest.TestCase):
     def test_that_bot_retreives_updates(self):
         response = requests.get(self.url+self.correct_telegram_token+'/'+'getUpdates').json()
         self.assertTrue(response['ok'])
+
+    # def test_that_command_is_not_empty(self):
+    #     self.
 if __name__== '__main__':
     unittest.main()
