@@ -10,6 +10,7 @@ class TelegramBotTests(unittest.TestCase):
         self.wrong_telegram_token = "123446789:ANT8aElKnUzIitrlvuvD-RzkRz31U1-0HXw"
         self.url = "https://api.telegram.org/bot"
         self.message = "text"
+        self.correct_command = "/update"
 
     def test_sends_message_successfully(self):
         # response after posting to telegram API
@@ -32,7 +33,7 @@ class TelegramBotTests(unittest.TestCase):
         response = requests.get(self.url+self.correct_telegram_token+'/'+'getUpdates').json()
         self.assertTrue(response['ok'])
 
-    # def test_that_command_is_not_empty(self):
-    #     self.
+    def test_that_command_is_not_empty(self):
+        self.assertEqual(telegram_client.get_user_commands(self.correct_command), 1)
 if __name__== '__main__':
     unittest.main()
