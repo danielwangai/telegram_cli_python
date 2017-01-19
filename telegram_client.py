@@ -13,5 +13,8 @@ def get_updates():
     response = requests.get(url+telegram_token+'/'+'getUpdates').json()
     return response
 
-send_message(173669942)
-# usr = raw_input("Enter name")
+user_input = input("Enter command")
+if user_input == "/updates":
+    first_name = get_updates()['result'][0]['message']['chat']['first_name']
+    last_name = get_updates()['result'][0]['message']['chat']['last_name']
+    print("A new user "+first_name+" "+last_name+" used the bot.")
