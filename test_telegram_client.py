@@ -11,6 +11,7 @@ class TelegramBotTests(unittest.TestCase):
         self.url = "https://api.telegram.org/bot"
         self.message = "text"
         self.correct_command = "/update"
+        self.list_of_commands = ["/command"]
 
     def test_sends_message_successfully(self):
         # response after posting to telegram API
@@ -35,5 +36,8 @@ class TelegramBotTests(unittest.TestCase):
 
     def test_that_command_is_not_empty(self):
         self.assertEqual(telegram_client.get_user_commands(self.correct_command), 1)
+
+    def test_for_expected_command(self):
+        self.assertTrue(telegram_client.get_user_commands("/command" in self.list_of_commands))
 if __name__== '__main__':
     unittest.main()
