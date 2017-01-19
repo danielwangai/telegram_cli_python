@@ -40,5 +40,8 @@ class TelegramBotTests(unittest.TestCase):
     def test_for_expected_command(self):
         self.assertEqual(telegram_client.get_user_commands("/update"), 1)
 
+    def test_for_unexpected_command(self):
+        self.assertEqual(telegram_client.get_user_commands("/unexpected_command"), 2)
+
 if __name__== '__main__':
     unittest.main()
